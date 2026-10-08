@@ -35,24 +35,24 @@ function App() {
 
     const value = e.currentTarget.innerHTML
 
-   
+
+    
     if (!isNaN(value)) {
 
-     
       if (justCalculated) {
         setDisp(value)
         setJustCalculated(false)
         return
       }
 
-   
+
       if (waitingForSecondNumber) {
         setDisp(value)
         setWaitingForSecondNumber(false)
         return
       }
 
-   
+
       if (disp === 0) {
         setDisp(value)
       } else {
@@ -62,7 +62,7 @@ function App() {
       return
     }
 
-  
+
     if (
       value === '+' ||
       value === '−' ||
@@ -70,32 +70,20 @@ function App() {
       value === '÷'
     ) {
 
-      
-      if (justCalculated) {
-        setOperand1(Number(disp))
-        setOperation(value)
-        setOperand2(null)
-        setWaitingForSecondNumber(true)
-        setJustCalculated(false)
-        return
-      }
-
-      
       setOperand1(Number(disp))
-
-      
       setOperation(value)
-
-     
       setOperand2(null)
 
-     
+      // SHOW THE OPERATOR ON THE DISPLAY
+      setDisp(value)
+
       setWaitingForSecondNumber(true)
+      setJustCalculated(false)
 
       return
     }
 
-   
+
     if (value === '=') {
 
       if (operand1 !== null && operation !== null) {
@@ -133,10 +121,9 @@ function App() {
           result = operand1 / secondNumber
         }
 
-      
+
         setDisp(result)
 
-    
         setOperand1(result)
         setOperand2(null)
         setOperation(null)
@@ -148,6 +135,7 @@ function App() {
       return
     }
   }
+
 
   
   const clearButtonClickHandler = (e) => {
@@ -161,12 +149,14 @@ function App() {
     setJustCalculated(false)
   }
 
- 
+
+  
   const nameButtonClickHandler = (e) => {
     e.preventDefault()
 
     setDisp('Cheenee Mandap')
   }
+
 
   return (
     <div className="App">
@@ -201,6 +191,7 @@ function App() {
             onClick={buttonClickHandler}
           />
 
+
           <CalcButton
             buttonLabel={4}
             onClick={buttonClickHandler}
@@ -221,6 +212,7 @@ function App() {
             onClick={buttonClickHandler}
           />
 
+
           <CalcButton
             buttonLabel={1}
             onClick={buttonClickHandler}
@@ -240,6 +232,7 @@ function App() {
             buttonLabel="−"
             onClick={buttonClickHandler}
           />
+
 
           <CalcButton
             buttonLabel="C"
@@ -264,6 +257,7 @@ function App() {
           />
 
         </div>
+
 
         <button
           className="name-button"
